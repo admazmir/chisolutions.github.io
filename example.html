@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Adam — Data Analytics Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-muted: #6b6b65;
+    --ink-faint: #b0afa8;
+    --surface: #faf9f7;
+    --surface-alt: #f2f0ec;
+    --accent: #1d6a4e;
+    --accent-light: #e6f2ed;
+    --border: rgba(26,26,24,0.1);
+    --border-strong: rgba(26,26,24,0.18);
+    --radius: 4px;
+    --radius-lg: 10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .hero {
+    padding: 140px 2rem 100px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(44px, 7vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--ink-muted);
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--ink-muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary { background: var(--ink); color: #fff; }
+  .btn-primary:hover { background: #333; transform: translateY(-1px); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 0.5px solid var(--border-strong); }
+  .btn-secondary:hover { background: var(--surface-alt); }
+
+  section {
+    padding: 80px 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .bio-text p {
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .bio-stats {
+    display: flex;
+    flex-direction: column;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 18px;
+    background: var(--surface);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .stat-row:last-child { border-bottom: none; }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+
+  .stat-value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.5rem;
+  }
+
+  .skill-tag {
+    padding: 5px 12px;
+    border-radius: 2px;
+    background: var(--surface-alt);
+    font-size: 12px;
+    color: var(--ink-muted);
+    border: 0.5px solid var(--border);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .resume-section { margin-bottom: 2.5rem; }
+
+  .resume-section-title {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .resume-item {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .resume-item:last-child { border-bottom: none; }
+
+  .resume-date {
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 2px;
+    line-height: 1.5;
+  }
+
+  .resume-role {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .resume-org {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .resume-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  .resume-desc ul { padding-left: 1rem; margin-top: 4px; }
+  .resume-desc li { margin-bottom: 3px; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .project-card {
+    padding: 1.5rem;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    transition: background 0.18s;
+  }
+
+  .project-card:hover { background: var(--surface-alt); }
+
+  .project-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius);
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .project-icon svg {
+    width: 18px; height: 18px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .project-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+
+  .project-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+  .project-tag {
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 3px 9px;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  .cert-grid { display: grid; gap: 12px; }
+
+  .cert-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition: border-color 0.18s, background 0.18s;
+  }
+
+  .cert-card:hover { border-color: var(--border-strong); background: var(--surface-alt); }
+
+  .cert-badge {
+    width: 44px; height: 44px;
+    border-radius: var(--radius);
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cert-badge svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cert-name { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+
+  .cert-verify {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  .cert-verify svg { width: 10px; height: 10px; stroke: var(--accent); fill: none; stroke-width: 2; }
+
+  .cert-date { font-size: 12px; color: var(--ink-faint); white-space: nowrap; text-align: right; }
+
+  /* Achievements */
+  .achieve-grid { display: grid; gap: 12px; }
+
+  .achieve-card {
+    padding: 1.25rem 1.5rem;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .achieve-org {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .achieve-list { list-style: none; padding: 0; }
+
+  .achieve-list li {
+    font-size: 13px;
+    color: var(--ink-muted);
+    padding: 4px 0;
+    border-bottom: 0.5px solid var(--border);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .achieve-list li:last-child { border-bottom: none; }
+
+  .achieve-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-faint);
+    font-size: 11px;
+  }
+
+  .contact-strip { background: var(--ink); padding: 60px 2rem; }
+
+  .contact-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .contact-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .contact-sub { font-size: 14px; color: rgba(255,255,255,0.45); }
+
+  .contact-links { display: flex; gap: 12px; flex-shrink: 0; }
+
+  .contact-btn {
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: inherit;
+    border: 0.5px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    background: transparent;
+    transition: all 0.18s;
+    cursor: pointer;
+  }
+
+  .contact-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .contact-btn.primary-btn { background: #fff; color: var(--ink); border-color: #fff; }
+  .contact-btn.primary-btn:hover { background: #f0ede8; }
+
+  footer {
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-faint);
+    border-top: 0.5px solid var(--border);
+  }
+
+  .section-divider { max-width: 860px; margin: 0 auto; height: 0.5px; background: var(--border); }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 11px; }
+    .hero { padding: 120px 1rem 60px; }
+    section { padding: 60px 1rem; }
+    .bio-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .resume-item { grid-template-columns: 1fr; gap: 4px; }
+    .cert-card { grid-template-columns: auto 1fr; }
+    .cert-date { display: none; }
+    .contact-inner { flex-direction: column; align-items: flex-start; }
+    .contact-strip { padding: 48px 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="nav-logo">Adam.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+  </ul>
+</nav>
+
+<div id="top"></div>
+<div class="hero">
+  <p class="hero-eyebrow">Data Analyst · Kuala Lumpur, Malaysia</p>
+  <h1>ETL pipelines,<br>dashboards that <em>drive decisions.</em></h1>
+  <p class="hero-desc">I'm Muhammad Adam Bin Syahroel Azmir — a CompTIA Data+ certified analyst specialising in Power BI, SQL, and end-to-end data solutions that move organisations forward.</p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View my work</a>
+    <a href="mailto:adamazmir16@gmail.com" class="btn btn-secondary">Get in touch</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About me</p>
+  <div class="bio-grid">
+    <div class="bio-text">
+      <h2>Who I am</h2>
+      <p>An IT in Business Computing graduate and CompTIA Data+ certified professional passionate about leveraging analytics to solve real-world business challenges.</p>
+      <p>I have a proven track record as a Data Analytics Intern at INOKOM Corporation (Sime Darby subsidiary), specialising in end-to-end ETL processes, SQL database management, and developing high-impact Power BI dashboards for corporate stakeholders including BMW Kulim Plant.</p>
+      <p>Highly motivated to apply advanced data analytics to uncover strategic insights, analyse market momentum, and drive operational efficiency.</p>
+      <div class="skills-list">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Microsoft SQL</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">BigQuery</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">ETL</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Data Governance</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Google Colab</span>
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">SharePoint</span>
+        <span class="skill-tag">Ubuntu</span>
+      </div>
+    </div>
+    <div>
+      <div class="bio-stats">
+        <div class="stat-row">
+          <span class="stat-label">Location</span>
+          <span class="stat-value">Kuala Lumpur, Malaysia</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Phone</span>
+          <span class="stat-value">+60 18-221 3856</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Email</span>
+          <span class="stat-value">adamazmir16@gmail.com</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Education</span>
+          <span class="stat-value">B.IT (Hons.) Business Computing</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Certifications</span>
+          <span class="stat-value">CompTIA Data+ · Google Analytics</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Languages</span>
+          <span class="stat-value">Bahasa Melayu · English</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Availability</span>
+          <span class="stat-value" style="color:var(--accent);">Open to opportunities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- RESUME -->
+<section id="resume">
+  <p class="section-label">Resume</p>
+  <h2>Experience &amp; education</h2>
+
+  <div class="resume-section" style="margin-top:2rem">
+    <p class="resume-section-title">Work experience</p>
+
+    <div class="resume-item">
+      <span class="resume-date">Jan 2026 – Jun 2026</span>
+      <div>
+        <p class="resume-role">Data Analytics Intern</p>
+        <p class="resume-org">INOKOM Corporation Sdn. Bhd. (Sime Darby Subsidiary) · Kulim, Kedah</p>
+        <div class="resume-desc">
+          <ul>
+            <li>Led two end-to-end Power BI dashboard projects automating reporting workflows for the Supply Chain Management Division and BMW Kulim Plant.</li>
+            <li>Conducted complex ETL processes and data cleansing on large-scale datasets across Microsoft SQL Server, ensuring data accuracy and structural consistency.</li>
+            <li>Presented finalised dashboards to top management for strategic sign-off prior to Go-Live deployment.</li>
+            <li>Facilitated cross-functional stakeholder meetings to translate operational needs into technical specifications.</li>
+            <li>Provided post-Go-Live support to ensure end-users could utilise dashboards efficiently.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-item">
+      <span class="resume-date">Jan 2024 – Dec 2025</span>
+      <div>
+        <p class="resume-role">Part-time Retail Associate</p>
+        <p class="resume-org">Neonshine Sdn. Bhd. (Adidas) · Cheras, Kuala Lumpur</p>
+        <div class="resume-desc">
+          <ul>
+            <li>Managed inventory records and stock movement using Microsoft systems and Excel.</li>
+            <li>Participated in full-store stock takes, identifying discrepancies and supporting shrinkage control initiatives.</li>
+            <li>Developed strong stakeholder engagement skills through daily customer and team interactions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="resume-item">
+      <span class="resume-date">Jul 2023 – Nov 2023</span>
+      <div>
+        <p class="resume-role">Software Programmer Intern</p>
+        <p class="resume-org">Majlis Agama Islam Negeri Sembilan (IT Department) · Seremban, Negeri Sembilan</p>
+        <div class="resume-desc">
+          <ul>
+            <li>Designed and developed Sistem Pinjaman Aset Alih, a web-based asset reservation system using Laravel 10, eliminating manual documentation processes.</li>
+            <li>Provided technical support, troubleshooting, and user training to improve system adoption.</li>
+            <li>Assisted in maintaining computer systems and internal network infrastructure.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-section">
+    <p class="resume-section-title">Education</p>
+
+    <div class="resume-item">
+      <span class="resume-date">Nov 2023 – Jun 2026</span>
+      <div>
+        <p class="resume-role">Bachelor of Information Technology (Hons.) in Business Computing</p>
+        <p class="resume-org">Universiti Poly-Tech Malaysia</p>
+        <div class="resume-desc">Majors: Data Analytics, Business Analytics and Project Management</div>
+      </div>
+    </div>
+
+    <div class="resume-item">
+      <span class="resume-date">Jul 2021 – Nov 2023</span>
+      <div>
+        <p class="resume-role">Diploma in Computer Science</p>
+        <p class="resume-org">Universiti Poly-Tech Malaysia</p>
+        <div class="resume-desc">Majors: Computing Fundamental and Programming</div>
+      </div>
+    </div>
+
+    <div class="resume-item">
+      <span class="resume-date">2016 – 2020</span>
+      <div>
+        <p class="resume-role">Sijil Pelajaran Malaysia (SPM)</p>
+        <p class="resume-org">Maktab Rendah Sains MARA Kuala Klawang</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <a href="#" class="btn btn-secondary" onclick="alert('Tip: Host your CV PDF and replace this href with the direct link.'); return false;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download CV
+    </a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Projects</p>
+  <h2>Selected work</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </div>
+      <p class="project-title">Warehouse Management Dashboard</p>
+      <p class="project-desc">Led development of a real-time container availability tracking solution at INOKOM, automating income reporting workflows and significantly reducing manual departmental effort.</p>
+      <div class="project-tags">
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">SQL Server</span>
+        <span class="project-tag">ETL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <p class="project-title">BKP Q-Gate & Process Audit Dashboards</p>
+      <p class="project-desc">Gathered business requirements and built dashboards to visualise production line quality data and internal audit metrics for the BMW Kulim Plant QA division, enhancing oversight and monitoring.</p>
+      <div class="project-tags">
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">QA Analytics</span>
+        <span class="project-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <p class="project-title">BKP Self-Announcement Integration</p>
+      <p class="project-desc">Optimised existing QA architecture by embedding a streamlined data section to fully automate recurring reporting for the BKP QA department, eliminating manual intervention.</p>
+      <div class="project-tags">
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">Automation</span>
+        <span class="project-tag">SharePoint</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <p class="project-title">Sistem Pinjaman Aset Alih</p>
+      <p class="project-desc">Engineered a web-based asset reservation platform for Majlis Agama Islam Negeri Sembilan using Laravel 10, fully replacing manual documentation and improving internal tracking efficiency.</p>
+      <div class="project-tags">
+        <span class="project-tag">Laravel 10</span>
+        <span class="project-tag">Web Dev</span>
+        <span class="project-tag">MySQL</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      </div>
+      <p class="project-title">Asset Management System (FYP)</p>
+      <p class="project-desc">Developed an integrated Asset Management and Reservation System for Universiti Poly-Tech Malaysia as a Final Year Project, with a built-in Inventory System to improve workflow efficiency and usability.</p>
+      <div class="project-tags">
+        <span class="project-tag">Web Dev</span>
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">FYP</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <p class="section-label">Certificates</p>
+  <h2>Credentials</h2>
+  <div class="cert-grid">
+
+    <div class="cert-card">
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <p class="cert-issuer">CompTIA · Yayasan Peneraju</p>
+        <p class="cert-name">Data+ Certification (DA0-001)</p>
+        <a href="http://verify.CompTIA.org" target="_blank" class="cert-verify">
+          Verify <svg viewBox="0 0 12 12"><path d="M2 2h8v8M10 2 2 10" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+      <div class="cert-date">Dec 2025<br><span style="color:var(--accent);font-weight:500;">Valid to Dec 2028</span></div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <p class="cert-issuer">Google · Coursera</p>
+        <p class="cert-name">Foundations of Data Science <span style="color:var(--ink-faint);font-weight:400;">(1 of 7)</span></p>
+        <a href="https://coursera.org/verify/5DQPGV45YQYD" target="_blank" class="cert-verify">
+          Verify <svg viewBox="0 0 12 12"><path d="M2 2h8v8M10 2 2 10" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+      <div class="cert-date">Apr 2026</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <p class="cert-issuer">Google · Coursera</p>
+        <p class="cert-name">Go Beyond the Numbers: Translate Data into Insights <span style="color:var(--ink-faint);font-weight:400;">(2 of 7)</span></p>
+        <a href="https://coursera.org/verify/9Q3HZ16SIPHO" target="_blank" class="cert-verify">
+          Verify <svg viewBox="0 0 12 12"><path d="M2 2h8v8M10 2 2 10" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+      <div class="cert-date">May 2026</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <div>
+        <p class="cert-issuer">Google · Coursera</p>
+        <p class="cert-name">The Power of Statistics <span style="color:var(--ink-faint);font-weight:400;">(3 of 7)</span></p>
+        <a href="https://coursera.org/verify/AOH7M3H1X3H4" target="_blank" class="cert-verify">
+          Verify <svg viewBox="0 0 12 12"><path d="M2 2h8v8M10 2 2 10" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+      <div class="cert-date">Jun 2026</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label">Achievements &amp; involvement</p>
+  <h2>Beyond the work</h2>
+  <div class="achieve-grid">
+
+    <div class="achieve-card">
+      <p class="achieve-org">Universiti Poly-Tech Malaysia</p>
+      <ul class="achieve-list">
+        <li>Dean's List across multiple semesters</li>
+        <li>Active participation in academia–industry collaboration programmes</li>
+      </ul>
+    </div>
+
+    <div class="achieve-card">
+      <p class="achieve-org">MRSM Kuala Klawang</p>
+      <ul class="achieve-list">
+        <li>Awarded Tokoh Kokurikulum for outstanding extracurricular leadership</li>
+        <li>Runner-up in STEM Competition within MRSM Se-Malaysia</li>
+        <li>President of Lentera Kesuma — traditional music ensemble</li>
+        <li>President of Anggota Pertahanan Awam Malaysia (APAM)</li>
+        <li>Active member of the school rugby club (Bison)</li>
+      </ul>
+    </div>
+
+    <div class="achieve-card">
+      <p class="achieve-org">INOKOM Corporation · Neonshine (Adidas)</p>
+      <ul class="achieve-list">
+        <li>Joined the INOKOM Committee and helped organise Fun Walk 2026 at the plant</li>
+        <li>Led full-store stock takes at Adidas, improving accuracy and shrinkage control</li>
+        <li>Adapted flexibly across stock, storekeeping, and sales roles based on operational needs</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-strip">
+  <div class="contact-inner">
+    <div>
+      <p class="contact-heading">Let's work together.</p>
+      <p class="contact-sub">Open to full-time roles, internships, and data projects.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:adamazmir16@gmail.com" class="contact-btn">adamazmir16@gmail.com</a>
+      <a href="https://www.linkedin.com/in/adam-azmir" target="_blank" class="contact-btn primary-btn">LinkedIn →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Muhammad Adam Bin Syahroel Azmir · Data Analyst · Kuala Lumpur, Malaysia
+</footer>
+
+</body>
+</html>
